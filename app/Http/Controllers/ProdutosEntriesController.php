@@ -123,14 +123,17 @@ class ProdutosEntriesController extends Controller
     public function destroy($id){
       $products_entries = Products_entrie::find($id);
 
+      if($products_entries->status_output == 0){
+        $product = Produtos::find($products_entries['produto_id']);
+        $product['quantidade_total'] -= $products_entries['montante'];
+        $product->save();
 
-      $product = Produtos::find($products_entries['produto_id']);
-      $product['quantidade_total'] -= $products_entries['montante'];
-      $product->save();
+        $products_entries->delete();
+        return redirect('produtos_entries')->with('alert-success', 'Entrada de Produto deletada com sucesso!!!');
 
-      $products_entries->delete();
-
-      return redirect('produtos_entries')->with('alert-success', 'Entrada de Produto deletada com sucesso!!!');
+      }else{
+        return redirect('produtos_entries')->with('alert-error', 'Não é Possível Deletar Entrada, Ouve Saída do Produto!!!');
+      }
 
     }
 

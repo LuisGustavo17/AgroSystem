@@ -2,10 +2,12 @@
 
 namespace App\Listeners;
 
+use App\Events\OutputProduct;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AlertExpirationDate
+
+class AlertStockMin
 {
     /**
      * Create the event listener.
@@ -14,17 +16,16 @@ class AlertExpirationDate
      */
     public function __construct()
     {
-        //
     }
 
     /**
      * Handle the event.
      *
-     * @param  AlertExpirationDate  $event
+     * @param  OutputProduct  $event
      * @return void
-     */ //AlertExpirationDate $event
-    public function handle()
+     */
+    public function handle(OutputProduct $event)
     {
-        dd('teste aqui');
+      return redirect('/')->with('alert-toastr', 'O item está com estoque baixo!!!');
     }
 }

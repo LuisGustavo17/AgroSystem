@@ -280,12 +280,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       icon: "success",
     });
     </script>
-  @elseif ($message = Session::get('alert-warning'))
+  @elseif ($message = Session::get('alert-error'))
     <script type="text/javascript">
       var msg = "<?php echo $message; ?>";
       swal({
         title: msg,
-        icon: "success",
+        icon: "error",
         buttons: false,
         timer: 4000,
       });

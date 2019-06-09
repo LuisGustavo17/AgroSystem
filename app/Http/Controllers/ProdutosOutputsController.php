@@ -145,8 +145,42 @@ public function store(Request $request){
     }
 
     public function destroy($id){
-      $produto = ProductsOutput::find($id);
-      $produto->delete();
+      $products_output = ProductsOutput::find($id);
+
+      $products = Produtos::find($products_output->product_id);
+      $products->quantidade_total += $products_output->amount;
+
+      while(1){
+        $products_entrie = Products_entrie::where('produto_id', '=', $products_output->product_id)
+        ->where('status_output', '<>', '0')
+        ->orderBy('data_validade', 'DESC')
+        ->first();
+
+        $aux = $products_entrie->montante - $products_entrie->qtd_entrada;
+
+        if($aux >= $products_output->amount){
+          $products_entrie->qtd_entrada += $products_output->amount;
+          $products_output->amount = 0;
+        }else{
+          $products_output->amount -= $aux;
+          $products_entrie->qtd_entrada += $aux;
+        }
+
+        if($products_entrie->montante == $products_entrie->qtd_entrada){
+            $products_entrie->status_output = 0;
+        }
+
+        $products_entrie->save();
+        $products_output->save();
+        $products->save();
+
+        if($products_output->amount == 0){
+          break;
+        }
+
+      }
+
+      $products_output->delete();
       return redirect('produtos_outputs')->with('alert-success', 'Saída Deletada com Sucesso!!!');//modificado
     }
 
