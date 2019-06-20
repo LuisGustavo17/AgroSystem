@@ -90,7 +90,7 @@ class ProdutosEntriesController extends Controller
     public function update(Request $request, $id){
 
       $this->validate($request, [
-        'produto'=>'required',
+        //'produto'=>'required',
         'quantidade'=>'required|integer',
         'data_validade'=>'required|date',
         'fornecedor'=>'required',
@@ -103,7 +103,7 @@ class ProdutosEntriesController extends Controller
         return redirect('produtos_entries/')->with('alert-error', 'Não é possível editar entrada, ouve saída!!!');
       }
 
-      $products_entries->produto_id = $request->get('produto');
+      //$products_entries->produto_id = $request->get('produto');
       $products_entries->data_validade = $request->get('data_validade');
       $products_entries->supplier_id = $request->input('fornecedor');
       $qtd = $request->get('quantidade');

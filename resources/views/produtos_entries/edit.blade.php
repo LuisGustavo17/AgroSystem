@@ -28,11 +28,8 @@
       </div>
       <select class="custom-select" id="produto" name="produto" disabled>
         @foreach($products as $p)
-            {{-- <option value="{{$p->id}}">{{$p->titulo}}</option> --}}
             @if($p->id == $produto_entries->produto_id)
               <option value="{{$p->id}}" selected>{{$p->titulo}}</option>
-            @else
-              <option value="{{$p->id}}">{{$p->titulo}}</option>
             @endif
         @endforeach
       </select>

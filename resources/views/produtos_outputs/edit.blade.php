@@ -40,8 +40,6 @@
         @foreach($products as $product)
             @if($product->id == $products_output->product_id)
               <option value="{{$product->id}}" selected>{{$product->titulo}}</option>
-            {{-- @else
-              <option value="{{$product->id}}">{{$product->titulo}}</option> --}}
             @endif
         @endforeach
       </select>

@@ -129,12 +129,12 @@ public function store(Request $request){
       //$this->authorize('update-produto', $produto);
 
       $this->validate($request, [
-        'produto'=>'required',
+        //'produto'=>'required',
         'nota'=>'required|min:3|max:50',
         'quantidade'=>'required|Integer',
       ]);
 
-      $produto->product_id = $request->get('produto');
+      //$produto->product_id = $request->get('produto');
       $produto->note = $request->get('nota');
       $produto->amount = $request->get('quantidade');
       $produto->date_output = now();
