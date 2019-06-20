@@ -14,7 +14,7 @@ class RulesController extends Controller
     public function index(){
       if(Auth::check()){
         $alerts = Alert::paginate(6);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('alerts.rules.index', compact('alerts', 'alerts_count'));
       }else{
@@ -25,7 +25,7 @@ class RulesController extends Controller
     public function create(){
       if(Auth::check()){
         $products = Produtos::all();
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('alerts.rules.create', compact('products', 'alerts_count'));
       }else{
@@ -51,7 +51,7 @@ class RulesController extends Controller
       if(Auth::check()){
         $alerts = Alert::find($id);
         $products = Produtos::all();
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('alerts.rules.edit', compact('alerts', 'id', 'products', 'alerts_count'));
       }else{

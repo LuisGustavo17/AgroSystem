@@ -5,7 +5,7 @@
   <div class="card-header">
     <h4>Usuários</h4>
       <div class="text-right">
-          <a href="{{url('users/create')}}" class="btn btn-success"><i class="fas fa-user-plus"></i></a>
+          <a href="{{url('users/create')}}" class="btn btn-success fas fa-user-plus"></a>
       </div>
   </div>
 

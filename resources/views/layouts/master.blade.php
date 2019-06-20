@@ -170,8 +170,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
              </li>
                <li class="nav-item">
                  <a href="{{url('#')}}" class="nav-link">
-                   <i class="fas fa-tools nav-icon"></i>
-                   <p>Outros</p>
+                   <i class="fas fa-user-clock nav-icon"></i>
+                   <p>Logs</p>
                  </a>
                </li>
              <!--
@@ -248,6 +248,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         @yield('content')
       </div><!-- /.container-fluid -->
     </div>
+
     <!-- /.content -->
   </div
   <!-- /.content-wrapper -->
@@ -260,7 +261,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Agro system
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019-2022 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

@@ -14,7 +14,7 @@ class ProdutosController extends Controller
     public function index(){
       if(Auth::check()){
         $produtos = Produtos::paginate(6);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('produtos.index', array('produtos'=> $produtos, 'buscar' => null, 'alerts_count'=>$alerts_count));
       }else{
@@ -30,7 +30,7 @@ class ProdutosController extends Controller
     public function create(){
       if(Auth::check()){
         $categories = Categories::all();
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
         return view('produtos.create', compact('categories', 'alerts_count'));
       }else{
         return redirect('login');
@@ -60,7 +60,7 @@ class ProdutosController extends Controller
       if(Auth::check()){
         $categories = Categories::all();
         $produto = Produtos::find($id);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
         /*
         if(Gate::denies('update-produto', $produto)){
             abort(403, 'Unauthorized');

@@ -36,7 +36,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="produto" name="produto">Produto</label>
       </div>
-      <select class="custom-select" id="produto" name="produto">
+      <select class="custom-select" id="produto" name="produto" disabled>
         @foreach($products as $product)
             @if($product->id == $products_output->product_id)
               <option value="{{$product->id}}" selected>{{$product->titulo}}</option>

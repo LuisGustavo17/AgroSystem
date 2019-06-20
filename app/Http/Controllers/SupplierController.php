@@ -15,7 +15,7 @@ class SupplierController extends Controller
     public function index(){
       if(Auth::check()){
         $suppliers = Supplier::paginate(6);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('supplier.index', compact('suppliers', 'alerts_count'));
       }else{
@@ -25,7 +25,7 @@ class SupplierController extends Controller
 
     public function create(){
       if(Auth::check()){
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
         return view('supplier.create', compact('alerts_count'));
       }else{
         return redirect('login');
@@ -56,7 +56,7 @@ class SupplierController extends Controller
     public function edit($id){
       if(Auth::check()){
         $suppliers = Supplier::find($id);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
         return view('supplier.edit', compact('suppliers', 'id', 'alerts_count'));
       }else{
         return redirect('login');

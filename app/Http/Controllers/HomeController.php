@@ -7,7 +7,12 @@ use App\Produtos;
 use App\Categories;
 use App\Supplier;
 use App\User;
+use App\Products_entrie;
+use App\ProductsOutput;
 use App\Historical_alert;
+use App\Charts\SampleChart;
+use App\Charts\DashboardChart;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -36,10 +41,31 @@ class HomeController extends Controller
 
       $categories = Categories::all()->count('id');
 
-      $alerts_count = Historical_alert::all()->count('id');
+      $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
-      return view('home', compact('itens','user', 'suppliers', 'categories', 'alerts_count'));
+      $br = new Carbon();
+
+      //dd($br->Weekday(3)->format('Y-m-d'.' 00:00:00'));
+      //$week[x] = Products_entrie::whereDate( 'created_at', '=', $br->Weekday(1)->format('Y-m-d'.' 00:00:00'))->count('id');
+      $week = array();
+      $x = 6;
+      while($x >= 0){
+        $entries[$x] = Products_entrie::whereDate( 'created_at', '=', $br->Weekday($x)->format('Y-m-d'.' 00:00:00'))->count('id');
+        $outputs[$x] = ProductsOutput::whereDate( 'created_at', '=', $br->Weekday($x)->format('Y-m-d'.' 00:00:00'))->count('id');
+        $x--;
+      }
+      //var_dump($week);
+      //dd($entries);
+      $chart = new DashboardChart;
+      $chart->labels(['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira','Sexta-feira', 'Sábado', 'Domingo']);
+      $chart->dataset('Entradas', 'bar', [$entries[1], $entries[2], $entries[3], $entries[4], $entries[5], $entries[6], $entries[0]])->color('green');
+      $chart->dataset('Saídas', 'bar', [$outputs[1], $outputs[2], $outputs[3], $outputs[4], $outputs[5], $outputs[6], $outputs[0]])->color('blue');
+      $chart->title("Entradas/Saídas");
+      $chart->spaceRatio(0.50);
+
+      return view('home', compact('itens','user', 'suppliers', 'categories', 'alerts_count', 'chart'));
 
     }
+
 
 }

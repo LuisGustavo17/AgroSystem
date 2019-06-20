@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function create(){
       if(Auth::check()){
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
         return view('users.create', compact('alerts_count'));
       }else{
         return redirect('login');
@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index(){
       if(Auth::check()){
         $user = User::all();
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('users.index', compact('user','alerts_count'));
       }else{
@@ -56,7 +56,7 @@ class UserController extends Controller
     public function edit($id){
       if(Auth::check()){
         $user = User::find($id);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('users.edit', compact('user', 'id', 'alerts_count'));
       }else{

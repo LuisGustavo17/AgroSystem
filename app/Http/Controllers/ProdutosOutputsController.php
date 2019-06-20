@@ -18,7 +18,7 @@ class ProdutosOutputsController extends Controller
       if(Auth::check()){
         $products = Produtos::all();
         $products_output = ProductsOutput::paginate(6);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('produtos_outputs.index', array('products_output'=> $products_output, 'products'=> $products , 'buscar' => null, 'alerts_count'=>$alerts_count));
       }else{
@@ -29,7 +29,7 @@ class ProdutosOutputsController extends Controller
     public function create(){
       if(Auth::check()){
         $products = Produtos::all();
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('produtos_outputs.create', compact('products', 'alerts_count'));
       }else{
@@ -62,7 +62,7 @@ public function store(Request $request){
   $products->save();
 
   // Dispatching Event
-      event(new OutputProduct($products));
+    event(new OutputProduct($products, $qtd_output));
 
   //fim
     while(1){
@@ -113,7 +113,7 @@ public function store(Request $request){
 
       $products = Produtos::all();
       $products_output = ProductsOutput::find($id);
-      $alerts_count = Historical_alert::all()->count('id');
+      $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
       return view('produtos_outputs.edit', compact('products', 'id', 'products_output', 'alerts_count'));
 

@@ -18,7 +18,7 @@ class ProdutosEntriesController extends Controller
 
         $product = Produtos::all();
         $products_entrie = Products_entrie::paginate(6);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('produtos_entries.index', array('products_entrie' => $products_entrie, 'products' => $product, 'buscar' => null, 'alerts_count' => $alerts_count));
 
@@ -36,7 +36,7 @@ class ProdutosEntriesController extends Controller
       if(Auth::check()){
         $products = Produtos::all();
         $suppliers = Supplier::all();
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('produtos_entries.create', compact('products', 'suppliers', 'alerts_count'));
       }else{
@@ -78,7 +78,7 @@ class ProdutosEntriesController extends Controller
         $products = Produtos::all();
         $produto_entries = Products_entrie::find($id);
         $suppliers = Supplier::all();
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
       return view('produtos_entries.edit', compact('products', 'id', 'produto_entries', 'suppliers', 'alerts_count'));
 
@@ -99,21 +99,36 @@ class ProdutosEntriesController extends Controller
       $products_entries = Products_entrie::find($id);
       $product = Produtos::find($products_entries->produto_id);
 
-      //atualizando o estoque total
-      if($request->get('quantidade') > $products_entries['montante']) {
-          $new =  $request->get('quantidade') - $products_entries['montante'];
-          $product['quantidade_total'] += $new;
-      }
-      else if($request->get('quantidade') < $products_entries['montante']) {
-          $new = $products_entries['montante'] - $request->get('quantidade');
-          $product['quantidade_total'] -= $new;
+      if($products_entries->montante - $products_entries->qtd_entrada != 0){
+        return redirect('produtos_entries/')->with('alert-error', 'Não é possível editar entrada, ouve saída!!!');
       }
 
       $products_entries->produto_id = $request->get('produto');
-      $products_entries->montante = $request->get('quantidade');
       $products_entries->data_validade = $request->get('data_validade');
       $products_entries->supplier_id = $request->input('fornecedor');
+      $qtd = $request->get('quantidade');
 
+      if($qtd > $products_entries->montante){
+
+          $aux =  $qtd -  $products_entries->montante;
+
+          //atualizando dados produto entrada
+          $products_entries->montante += $aux;
+          $products_entries->qtd_entrada += $aux;
+          $products_entries->status_output = 0;
+
+          //atualizando estoque total
+          $product->quantidade_total += $aux;
+
+      }else if($qtd < $products_entries->montante){
+
+          //atualizando dados produto entrada
+          $products_entries->montante -= $qtd;
+          $products_entries->qtd_entrada -= $qtd;
+          //atualizando estoque total
+          $product->quantidade_total -= $qtd;
+
+      }
 
       if($products_entries->save() and $product->save()){
         return redirect('produtos_entries/')->with('alert-success', 'Entrada de Produto atualizado com sucesso!!!');
@@ -152,5 +167,15 @@ class ProdutosEntriesController extends Controller
 
       return view('produtos_entries.index', array('products_entrie'=> $busca, 'products'=> $product, 'alerts_count'=> $alerts_count));
     }
-
+    /*
+    //atualizando o estoque total
+    if($request->get('quantidade') > $products_entries['montante']) {
+        $new =  $request->get('quantidade') - $products_entries['montante'];
+        $product['quantidade_total'] += $new;
+    }
+    else if($request->get('quantidade') < $products_entries['montante']) {
+        $new = $products_entries['montante'] - $request->get('quantidade');
+        $product['quantidade_total'] -= $new;
+    }
+    */
 }

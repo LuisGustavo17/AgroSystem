@@ -32,8 +32,14 @@
         <th>{{$hist_alert->id}}</th>
         <td>{{$hist_alert->title}}</td>
         <td>{{$hist_alert->description}}</td>
-        <td>{{date('d/m/Y H:i:s', strtotime($hist_alert->updated_at))}}</td>
-        <td><span class="badge badge-pill badge-secondary">marcar como lido <i class="fas fa-check"></i></span></td>
+        <td>{{date('d/m/Y H:i:s', strtotime($hist_alert->created_at))}}</td>
+        <td>
+          @if($hist_alert->read_in)
+            {{date('d/m/Y H:i:s', strtotime($hist_alert->read_in))}}
+          @else
+            <a href="{{url('alerts/notifications/read/'.$hist_alert->id)}}"><span class="badge badge-pill badge-secondary">marcar como lido <i class="fas fa-check"></i></span></a>
+          @endif
+        </td>
       </tr>
       @endforeach
 </table>

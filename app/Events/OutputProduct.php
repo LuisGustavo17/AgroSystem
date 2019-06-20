@@ -22,9 +22,10 @@ class OutputProduct
      *
      * @return void
      */
-    public function __construct($products)
+    public function __construct($products, $qtd_output)
     {
         $this->product = $products;
+        $this->qtd = $qtd_output;
     }
 
 

@@ -13,7 +13,7 @@ class CategoriesController extends Controller
     public function index(){
       if(Auth::check()){
         $categories = Categories::paginate(6);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
         return view('categorias.index', compact('categories', 'alerts_count'));
       }else{
         return redirect('login');
@@ -22,7 +22,7 @@ class CategoriesController extends Controller
 
     public function create(){
       if(Auth::check()){
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
         return view('categorias.create', compact('alerts_count'));
       }else{
         return redirect('login');
@@ -44,7 +44,7 @@ class CategoriesController extends Controller
     public function edit($id){
       if(Auth::check()){
         $categories = Categories::find($id);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
         return view('categorias.edit', compact('categories', 'id', 'alerts_count'));
       }else{
         return redirect('login');

@@ -20,7 +20,7 @@ class CreateHistoricalAlertsTable extends Migration
 
             $table->string('title');// titulo
             $table->longtext('description'); //descrição do alerta
-            $table->date('read_in')->nullable(); //lido em
+            $table->datetime('read_in')->nullable(); //lido em
 
             $table->timestamps();
         });

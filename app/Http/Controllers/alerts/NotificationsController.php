@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Historical_alert;
+use Carbon\Carbon;
 
 class NotificationsController extends Controller
 {
@@ -12,7 +13,7 @@ class NotificationsController extends Controller
     public function index(){
       if(Auth::check()){
         $hist_alerts = Historical_alert::paginate(6);
-        $alerts_count = Historical_alert::all()->count('id');
+        $alerts_count = Historical_alert::whereNull('read_in')->count('id');
 
         return view('alerts.notifications.index', compact('hist_alerts', 'alerts_count'));
       }else{
@@ -20,12 +21,15 @@ class NotificationsController extends Controller
       }
     }
 
-    public function destroy($id){
-      $alert = Alert::find($id);
+    public function read($id){
+        $hist_alerts = Historical_alert::find($id);
 
-      $alert->delete();
+        $date = new Carbon();
 
-      return redirect('alerts')->with('alert-success', 'Alerta Deletado com Sucesso!!!');
+        $hist_alerts->read_in = $date->format('Y-m-d H:i:s');
+
+        $hist_alerts->save();
+        return redirect('/alerts/notifications');
     }
 
 }

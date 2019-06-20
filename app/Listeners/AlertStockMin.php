@@ -7,6 +7,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Alert;
 use App\Historical_alert;
+use Telegram\Bot\Api;
+use Carbon\Carbon;
 
 class AlertStockMin
 {
@@ -26,7 +28,7 @@ class AlertStockMin
      * @return void
      */
     public function handle(OutputProduct $event)
-    {
+    { //dd($event);
           $id = $event->product->id;
 
           $name = $event->product->titulo;
@@ -44,12 +46,15 @@ class AlertStockMin
               if($amount <= $stock_min){
 
                 $update = Historical_alert::where('title','Estoque Baixo')
-                ->where('alert_id', '=', $alert[0]->id)
+                ->where('alert_id', '=', $alert[0]->id)->whereNull('read_in')
                 ->first();
+
+                $date = new Carbon();
 
                 if($update){
                     $hist_alert = Historical_alert::find($update->id);
                     $hist_alert->alert_id = $alert[0]->id;
+                    $hist_alert->created_at = $date->format('Y-m-d H:i:s');
                     $hist_alert->title = "Estoque Baixo";
                     $hist_alert->description = $name.' está com estoque baixo!!!';
                 }else{
@@ -60,6 +65,18 @@ class AlertStockMin
                 }
 
                 if($hist_alert->save()){
+
+                  $response = \Telegram::sendMessage([
+                  'chat_id' => '840618696',
+                  'text' => '<b>ALERTA DE ESTOQUE BAIXO</b>                                                                  '.
+                  '<b>Produto: </b><b>'.$name.'</b>                                                            '.
+                  '<b>Alerta definido para: </b><b>'.$stock_min.' '.$event->product->unidade_medida.'</b>                                                          '.
+                  '<b>Estoque total: </b>'.'<b>'. $amount.' '.$event->product->unidade_medida.'</b>                                                                '.
+                  '<b>Quantidade retirada: </b>'.'<b>'.$event->qtd.' '.$event->product->unidade_medida.'</b>                                                               '.
+                  '<a href="http://ec2-54-94-153-153.sa-east-1.compute.amazonaws.com/">VERIFICAR</a>',
+                  'parse_mode' => 'html',
+                  ]);
+
                   return redirect('/')->with('alert-toastr', 'O item '.$name.' está com estoque baixo!!!');
                 }
               }

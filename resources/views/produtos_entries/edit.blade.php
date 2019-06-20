@@ -26,7 +26,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="produto" name="produto">Produto</label>
       </div>
-      <select class="custom-select" id="produto" name="produto">
+      <select class="custom-select" id="produto" name="produto" disabled>
         @foreach($products as $p)
             {{-- <option value="{{$p->id}}">{{$p->titulo}}</option> --}}
             @if($p->id == $produto_entries->produto_id)

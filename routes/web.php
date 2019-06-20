@@ -46,6 +46,8 @@ Route::group(['prefix' => 'alerts'], function(){
     Route::resource('rules', 'RulesController');
     //notificaçõesController
     Route::get('notifications', 'NotificationsController@index');
+    //notificaçõesLida
+    Route::get('notifications/read/{id}', 'NotificationsController@read');
 });
 
 //profile
