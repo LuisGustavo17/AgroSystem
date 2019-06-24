@@ -32,4 +32,11 @@ class NotificationsController extends Controller
         return redirect('/alerts/notifications');
     }
 
+    public function destroy($id){
+      $hist_alerts = Historical_alert::find($id);
+
+      $hist_alerts->delete();
+
+      return redirect('alerts/notifications')->with('alert-success', 'Notificação Deletada com Sucesso!!!');
+    }
 }

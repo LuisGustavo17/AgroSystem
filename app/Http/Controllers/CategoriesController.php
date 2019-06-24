@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Categories;
 use App\Historical_alert;
+use App\Produtos;
 
 class CategoriesController extends Controller
 {
@@ -66,6 +67,12 @@ class CategoriesController extends Controller
     }
 
     public function destroy($id){
+        $search = Produtos::where('categoria_id', '=', $id)->count('id');
+
+        if($search > 0){
+            return redirect('categories/')->with('alert-error', 'Categoria em uso, não é possível Deletar!!!');
+        }
+
       $categories = Categories::find($id);
       $categories->delete();
       return redirect('categories/')->with('alert-success', 'Categoria Deletada com Sucesso!!!');

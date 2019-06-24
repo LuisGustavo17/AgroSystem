@@ -35,7 +35,8 @@
         <td>{{date('d/m/Y H:i:s', strtotime($hist_alert->created_at))}}</td>
         <td>
           @if($hist_alert->read_in)
-            {{date('d/m/Y H:i:s', strtotime($hist_alert->read_in))}}
+            {{date('d/m/Y H:i:s', strtotime($hist_alert->read_in))}}&nbsp&nbsp&nbsp&nbsp<a href="#" data-target="#modal-delete-{{$hist_alert->id}}" data-toggle="modal"><span class="badge badge-pill badge-danger">excluir <i class="fas fa-times"></i></span></a>
+            @include('alerts.notifications.modal')
           @else
             <a href="{{url('alerts/notifications/read/'.$hist_alert->id)}}"><span class="badge badge-pill badge-secondary">marcar como lido <i class="fas fa-check"></i></span></a>
           @endif

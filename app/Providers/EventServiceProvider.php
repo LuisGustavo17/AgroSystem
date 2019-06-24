@@ -20,19 +20,16 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        /*
-        Login::class => [
-            AlertExpirationDate::class,
-        ],
-        */
         \App\Events\OutputProduct::class => [
             \App\Listeners\AlertStockMin::class,
-        ],/*
-        \App\Events\SystemLogin::class => [
-            \App\Listeners\AlertExpirationDate::class,
-        ],*/
+        ],
+        \App\Events\RegisterProduct::class => [
+            \App\Listeners\RegisterLog::class,
+        ],
     ];
-
+    protected $subscribe = [
+        'App\Listeners\UserEventSubscriber',
+    ];
     /**
      * Register any events for your application.
      *

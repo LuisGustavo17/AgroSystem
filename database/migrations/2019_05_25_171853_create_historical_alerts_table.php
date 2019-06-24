@@ -15,9 +15,9 @@ class CreateHistoricalAlertsTable extends Migration
     {
         Schema::create('historical_alerts', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('alert_id');
-            $table->foreign('alert_id')->references('id')->on('alerts')->onDelete('cascade');
-
+            //$table->unsignedInteger('alert_id');
+            //$table->foreign('alert_id')->references('id')->on('alerts')->onDelete('cascade');
+            $table->integer('product_id');
             $table->string('title');// titulo
             $table->longtext('description'); //descrição do alerta
             $table->datetime('read_in')->nullable(); //lido em

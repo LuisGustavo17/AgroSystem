@@ -169,19 +169,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                </a>
              </li>
                <li class="nav-item">
-                 <a href="{{url('#')}}" class="nav-link">
+                 <a href="{{url('/logs')}}" class="nav-link">
                    <i class="fas fa-user-clock nav-icon"></i>
                    <p>Logs</p>
                  </a>
                </li>
-             <!--
-             <li class="nav-item">
-               <a href="{{url('/alerts')}}" class="nav-link">
-                 <i class="fas fa-exclamation-triangle nav-icon"></i>
-                 <p>Alertas</p>
-               </a>
-             </li>
-           -->
            </ul>
          </li>
 

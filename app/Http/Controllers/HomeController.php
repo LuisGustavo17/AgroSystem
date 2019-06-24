@@ -49,17 +49,19 @@ class HomeController extends Controller
       //$week[x] = Products_entrie::whereDate( 'created_at', '=', $br->Weekday(1)->format('Y-m-d'.' 00:00:00'))->count('id');
       $week = array();
       $x = 6;
+
       while($x >= 0){
         $entries[$x] = Products_entrie::whereDate( 'created_at', '=', $br->Weekday($x)->format('Y-m-d'.' 00:00:00'))->count('id');
         $outputs[$x] = ProductsOutput::whereDate( 'created_at', '=', $br->Weekday($x)->format('Y-m-d'.' 00:00:00'))->count('id');
         $x--;
       }
+
       //var_dump($week);
-      //dd($entries);
+      //dd($br->Weekday(2)->format('Y-m-d'));
       $chart = new DashboardChart;
-      $chart->labels(['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira','Sexta-feira', 'Sábado', 'Domingo']);
-      $chart->dataset('Entradas', 'bar', [$entries[1], $entries[2], $entries[3], $entries[4], $entries[5], $entries[6], $entries[0]])->color('green');
-      $chart->dataset('Saídas', 'bar', [$outputs[1], $outputs[2], $outputs[3], $outputs[4], $outputs[5], $outputs[6], $outputs[0]])->color('blue');
+      $chart->labels(['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira','Sexta-feira', 'Sábado']);
+      $chart->dataset('Entradas', 'bar', [$entries[0], $entries[1], $entries[2], $entries[3], $entries[4], $entries[5], $entries[6]])->color('green');
+      $chart->dataset('Saídas', 'bar', [$outputs[0], $outputs[1], $outputs[2], $outputs[3], $outputs[4], $outputs[5], $outputs[6]])->color('blue');
       $chart->title("Entradas/Saídas");
       $chart->spaceRatio(0.50);
 

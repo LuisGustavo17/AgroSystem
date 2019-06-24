@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Produtos;
 use App\Categories;
 use App\Historical_alert;
+use App\Events\RegisterProduct;
 
 class ProdutosController extends Controller
 {
@@ -52,6 +53,10 @@ class ProdutosController extends Controller
       $produto->categoria_id = $request->input('categoria');
 
       if($produto->save()){
+
+        // Dispatching Event
+        event(new RegisterProduct($produto));
+
         return redirect('produtos/')->with('alert-success', 'Produto Cadastrado com Sucesso!!!');
       }
     }
@@ -94,6 +99,9 @@ class ProdutosController extends Controller
       $produto->unidade_medida = $request->get('unidade_medida');
 
       if($produto->save()){
+        // Dispatching Event
+        //event(new RegisterProduct($produto));
+
         return redirect('produtos/')->with('alert-success', 'Produto Atualizado com Sucesso!!!');
       }
     }

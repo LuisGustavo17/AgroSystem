@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Historical_alert;
+use App\Products_entrie;
+use Carbon\Carbon;
+
 class Alertas extends Command
 {
     /**
@@ -18,7 +21,7 @@ class Alertas extends Command
      *
      * @var string
      */
-    protected $description = 'Este comando verifica e informa os alertas do sistema';
+    protected $description = 'Este comando verifica datas de vencimento proximas';
 
     /**
      * Create a new command instance.
@@ -37,10 +40,24 @@ class Alertas extends Command
      */
     public function handle()
     {
+      $searchs = Products_entrie::all();
+
+      $br = new Carbon();
+      //$br->subDay(2);
+
       $hist_alert = new Historical_alert();
-      $hist_alert->alert_id = 1;
-      $hist_alert->title = "Estoque Baixo";
-      $hist_alert->description = 'está com estoque baixosadfsdf!!!';
-      $hist_alert->save();
+
+      foreach ( $searchs as $search ) {
+        //dd($search);
+        if($br->diffInDays($search->data_validade) <= 2){
+          if(Historical_alert::where('title', '=', 'vencimento')->where('product_id', '=', $search->produto_id)->count() == 0){
+            $hist_alert->product_id = $search->produto_id;
+            $hist_alert->title = "Vencimento";
+            $hist_alert->description = $search->produtos->titulo.' possui lotes com vencimento proximo!!!';
+            $hist_alert->save();
+          }
+        }
+      }
+
     }
 }

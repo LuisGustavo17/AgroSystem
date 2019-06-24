@@ -46,20 +46,20 @@ class AlertStockMin
               if($amount <= $stock_min){
 
                 $update = Historical_alert::where('title','Estoque Baixo')
-                ->where('alert_id', '=', $alert[0]->id)->whereNull('read_in')
-                ->first();
+                ->whereNull('read_in')->where('product_id', '=', $alert[0]->id)
+                ->first(); 
 
                 $date = new Carbon();
 
                 if($update){
                     $hist_alert = Historical_alert::find($update->id);
-                    $hist_alert->alert_id = $alert[0]->id;
+                    //$hist_alert->alert_id = $alert[0]->id;
                     $hist_alert->created_at = $date->format('Y-m-d H:i:s');
                     $hist_alert->title = "Estoque Baixo";
                     $hist_alert->description = $name.' está com estoque baixo!!!';
                 }else{
                     $hist_alert = new Historical_alert();
-                    $hist_alert->alert_id = $alert[0]->id;
+                    //$hist_alert->alert_id = $alert[0]->id;
                     $hist_alert->title = "Estoque Baixo";
                     $hist_alert->description = $name.' está com estoque baixo!!!';
                 }

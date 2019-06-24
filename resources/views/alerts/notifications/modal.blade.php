@@ -1,7 +1,7 @@
 
-<div class="modal" tabindex="-1" role="dialog" id="modal-delete-{{$alert->id}}">
+<div class="modal" tabindex="-1" role="dialog" id="modal-delete-{{$hist_alert->id}}">
 
-	{{Form::Open(array('action'=>array('RulesController@destroy',$alert->id),'method'=>'delete'))}}
+	{{Form::Open(array('action'=>array('NotificationsController@destroy',$hist_alert->id),'method'=>'delete'))}}
 
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -12,7 +12,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Excluir alerta?</p>
+        <p>Excluir notificação?</p>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-danger">excluir</button>

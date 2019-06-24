@@ -8,6 +8,7 @@ use App\Produtos;
 use App\Categories;
 use App\Supplier;
 use App\Historical_alert;
+use App\Products_entrie;
 
 class SupplierController extends Controller
 {
@@ -87,8 +88,14 @@ class SupplierController extends Controller
     }
 
     public function destroy($id){
-      $supplier = Supplier::find($id);
 
+      $search = Products_entrie::where('supplier_id', '=', $id)->count('id');
+
+      if($search > 0){
+          return redirect('supplier/')->with('alert-error', 'Fornecedor em uso, não é possível Deletar!!!');
+      }
+
+      $supplier = Supplier::find($id);
       $supplier->delete();
       return redirect('supplier')->with('alert-success', 'Fornecedor Deletado com Sucesso!!!');
     }
