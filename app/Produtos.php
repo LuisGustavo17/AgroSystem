@@ -11,7 +11,7 @@ class Produtos extends Model
       return $this->belongsTo(User::class, 'user_id');//retorna a interação entre as tabelas
     }
     */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','quantidade_total'];
 
     public function category(){
         return $this->belongsTo('App\Categories', 'categoria_id', 'id');

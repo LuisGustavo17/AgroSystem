@@ -36,11 +36,20 @@
     </div>
 
     <div class="form-row">
-    	<div class="form-group mb-3 col-6">
+    	<div class="form-group mb-3 col-5">
     		<label for="quantidade">Quantidade</label>
     	   <input type="number" class="form-control" value="{{$produto_entries->montante}}" id="quantidade" name="quantidade" min="0" placeholder="0"/>
       </div>
-      <div class="form-group mb-3 col-6">
+      <div class="form-group mb-3 col-4">
+    <label for="preco">Preço</label>
+	 	<div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		    	<span class="input-group-text" id="basic-addon1">R$</span>
+			</div>
+		    <input type="number" step="1" class="form-control" value="{{$produto_entries->preco}}" id="preco" name="preco" placeholder="0,00" required>
+	 	</div>
+    </div>
+      <div class="form-group mb-3 col-3">
     		<label for="nome">Data de validade</label>
     	   <input type="date" class="form-control" value="{{$produto_entries->data_validade}}" id="data_validade" name="data_validade" placeholder="0"/>
       </div>

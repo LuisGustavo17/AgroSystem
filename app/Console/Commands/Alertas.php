@@ -44,20 +44,27 @@ class Alertas extends Command
 
       $br = new Carbon();
       //$br->subDay(2);
-
-      $hist_alert = new Historical_alert();
+      $count = 0;
 
       foreach ( $searchs as $search ) {
-        //dd($search);
-        if($br->diffInDays($search->data_validade) <= 2){
-          if(Historical_alert::where('title', '=', 'vencimento')->where('product_id', '=', $search->produto_id)->count() == 0){
+
+        if($br->diffInDays($search->data_validade) <= 2 && Historical_alert::where('title', '=', 'Vencimento')->where('product_id', '=', $search->produto_id)->count() == 0){
+
+            $hist_alert = new Historical_alert();
             $hist_alert->product_id = $search->produto_id;
             $hist_alert->title = "Vencimento";
             $hist_alert->description = $search->produtos->titulo.' possui lotes com vencimento proximo!!!';
             $hist_alert->save();
-          }
+
+            $response = \Telegram::sendMessage([
+            'chat_id' => '-1001437741965.0',
+            'text' => '<b>ALERTA DE VENCIMENTO PROXIMO</b>                                                                  '.
+            '<b>'.$search->produtos->titulo.'</b> possui lotes com vencimento proximo!!!'.
+            '<a href="http://ec2-54-94-153-153.sa-east-1.compute.amazonaws.com/">VERIFICAR</a>',
+            'parse_mode' => 'html',
+            ]);
+
         }
       }
-
     }
 }

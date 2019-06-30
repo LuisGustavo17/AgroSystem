@@ -51,6 +51,7 @@ class ProdutosEntriesController extends Controller
         'produto'=>'required',
         'quantidade'=>'required|integer',
         'data_validade'=>'required|date|after:now',
+        'preco'=> 'required|numeric',
         'fornecedor'=>'required',
       ]);
 
@@ -64,6 +65,8 @@ class ProdutosEntriesController extends Controller
       $produto->montante = $request->input('quantidade');
       //teste
       $produto->qtd_entrada = $request->input('quantidade');
+      //
+      $produto->preco = $request->input('preco');
       //
       $produto->data_validade = $request->input('data_validade');
       $produto->supplier_id = $request->input('fornecedor');
@@ -94,6 +97,7 @@ class ProdutosEntriesController extends Controller
         'quantidade'=>'required|integer',
         'data_validade'=>'required|date',
         'fornecedor'=>'required',
+        'preco'=> 'required|numeric',
       ]);
 
       $products_entries = Products_entrie::find($id);
@@ -106,6 +110,8 @@ class ProdutosEntriesController extends Controller
       //$products_entries->produto_id = $request->get('produto');
       $products_entries->data_validade = $request->get('data_validade');
       $products_entries->supplier_id = $request->input('fornecedor');
+      $products_entries->preco = $request->input('preco');
+      
       $qtd = $request->get('quantidade');
 
       if($qtd > $products_entries->montante){

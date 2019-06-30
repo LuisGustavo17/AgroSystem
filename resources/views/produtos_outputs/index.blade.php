@@ -57,7 +57,7 @@
         </div>
       </div>
     @if($products_output->count())
-    <table class="table  table-bordered table-hover">
+    <table class="table table-bordered table-hover">
       <thead>
         <tr>
           <th scope="col" width="50px">Id</th>

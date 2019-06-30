@@ -20,6 +20,7 @@ class CreateProductsEntriesTable extends Migration
         $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
         $table->float('montante');
         $table->date('data_validade');
+        $table->float('preco');
         $table->float('qtd_entrada');
         $table->integer('status_output')->default(0);
 

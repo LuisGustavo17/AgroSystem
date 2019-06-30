@@ -25,7 +25,7 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Id</th>
+                  <th scope="col" width="5%">Id</th>
                   <th scope="col">Nome</th>
                   <th scope="col" width="15%">Ações</th>
                 </tr>
@@ -50,7 +50,7 @@
                 </tr>
                 @endforeach
           </table>
-          
+
           @endif
           </div>
     {{-- {!!$produtos->links()!!} --}}

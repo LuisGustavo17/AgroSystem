@@ -7,6 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Historical_alert;
 use Carbon\Carbon;
 use App\Products_entrie;
+use Telegram\Bot\Api;
+
 class UserEventSubscriber
 {
   /**

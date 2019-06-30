@@ -39,8 +39,9 @@
 
 	<form method="POST" action="{{url('produtos_outputs')}}">
     @csrf
-
-  <div class="input-group mb-3">
+  <div class="row">
+    <div class="col">
+  <div class="input-group mb-3 ">
     <div class="input-group-prepend">
       <label class="input-group-text" for="produto" name="produto">Produto</label>
     </div>
@@ -51,9 +52,18 @@
       @endforeach
     </select>
   </div>
-
+</div>
+<div class="col">
+  <div class="input-group mb-3 ">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="" name="">Quantidade Disponível:</label>
+    </div>
+    <input type="text" class="form-control" id="resp" value="Selecione o produto" disabled/>
+  </div>
+</div>
+</div>
   <div class="form-group mb-3">
-		  <label for="nota">Nota:</label>
+		  <label for="nota">Nota</label>
 		  <textarea class="form-control" id="nota" name="nota" rows="1" placeholder="Digite uma breve descrição da aplicação final do Produto..." required></textarea>
 	</div>
   <div class="form-group mb-3">
@@ -65,5 +75,18 @@
     <a href="{{url('produtos_outputs')}}" class="btn btn-secondary">Cancelar</a>
 </div>
 </div>
-	</form>
+</form>
+  <script>
+    $('#produto').change(function(){
+      var id = $(this).val();
+      $.ajax({
+              type:'GET',
+              url:'/amount/'+id,
+              data:'_token = <?php echo csrf_token() ?>',
+              success:function(data) {
+                 document.getElementById("resp").value = data;
+              }
+           });
+    });
+  </script>
 @endsection

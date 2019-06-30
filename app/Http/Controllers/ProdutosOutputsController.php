@@ -52,7 +52,7 @@ public function store(Request $request){
 
   //validação: saída supera estoque total
   if($qtd_output > $products->quantidade_total && $products->quantidade_total != 0){
-      return redirect('produtos_outputs/create')->with('danger', "Não foi possível realizar a saída, a quantidade supera o estoque total!!! Estoque total é de: ".$products->quantidade_total.' item');
+      return redirect('produtos_outputs/create')->with('danger', "Não foi possível realizar a saída, a quantidade supera o estoque total!!!");
   }else if($products->quantidade_total == 0){
       return redirect('produtos_outputs/create')->with('danger', "Não foi possível realizar a saída, o estoque está zerado!!!");
   }
@@ -133,7 +133,9 @@ public function store(Request $request){
         'nota'=>'required|min:3|max:50',
         'quantidade'=>'required|Integer',
       ]);
-
+      if($request->get('quantidade') != $produto->amount){
+          return redirect('produtos_outputs/')->with('alert-error', 'Error: em desenvolvimento!!!');
+      }
       //$produto->product_id = $request->get('produto');
       $produto->note = $request->get('nota');
       $produto->amount = $request->get('quantidade');
@@ -198,5 +200,12 @@ public function store(Request $request){
       ->paginate(6);
 
       return view('produtos_outputs.index', array('products_output'=> $busca, 'products'=> $product, 'alerts_count'=> $alerts_count));
+    }
+
+    public function amount($id){
+      //função para retornar a quantidade de produtos disponível na saída de estoque
+        $value = Produtos::find($id);
+        $text = $value->quantidade_total .' '.$value->unidade_medida;
+        return $text;
     }
 }

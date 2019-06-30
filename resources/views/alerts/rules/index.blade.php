@@ -34,7 +34,7 @@
         <td>{{$alert->id}}</td>
         <td>{{$alert->produtos->titulo}}</td>
         <td>{{$alert->stock_min.' '.$alert->produtos->unidade_medida}}</td>
-        <td>N</td>
+        <td>Sim</td>
         <td>
           @if(Auth::check())
 

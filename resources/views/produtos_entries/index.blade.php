@@ -61,6 +61,7 @@
           <th scope="col">Id</th>
           <th scope="col">Nome</th>
           <th scope="col">Quantidade</th>
+          <th scope="col" width="15%">Preço</th>
           <th scope="col">Data de Entrada</th>
           <th scope="col">Data de Validade</th>
           <th scope="col">Ações</th>
@@ -72,6 +73,7 @@
           <th>{{$p->id}}</th>
           <td>{{$p->produtos->titulo}}</td>
           <td>{{$p->montante.' '.$p->produtos->unidade_medida}}</td>
+          <td>R$ {{$p->preco}}</td>
           <td>{{date('d/m/Y', strtotime($p->created_at))}}</td>
           <td>{{date('d/m/Y', strtotime($p->data_validade))}}</td>
           <td width="10%">

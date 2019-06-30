@@ -9,6 +9,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Http\Request;
+use Telegram\Bot\Api;
 
 Route::group(['prefix' => 'painel'], function(){
     //permissionController
@@ -36,6 +38,7 @@ Route::resource('/categories', 'CategoriesController');
 Route::resource('/supplier', 'SupplierController');
 //saída de produtos
 Route::resource('/produtos_outputs', 'ProdutosOutputsController');
+Route::get('/amount/{id}', 'ProdutosOutputsController@amount');
 Route::post('/produtos_outputs/busca', 'ProdutosOutputsController@busca');
 //users
 Route::resource('/users', 'UserController');
@@ -59,7 +62,6 @@ Route::resource('/logs', 'LogController');
 Route::get('/profile', function(){
      return view('profile.index');
 });
-
 //Login
 Route::get('/', function(){
      return view('auth.login');
@@ -68,3 +70,8 @@ Route::get('/', function(){
 //Login
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/bot/getupdates', function() {
+      $activity = Telegram::getUpdates();
+      dd($activity);
+});

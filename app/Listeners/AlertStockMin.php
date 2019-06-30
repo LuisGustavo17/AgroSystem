@@ -47,19 +47,19 @@ class AlertStockMin
 
                 $update = Historical_alert::where('title','Estoque Baixo')
                 ->whereNull('read_in')->where('product_id', '=', $alert[0]->id)
-                ->first(); 
+                ->first();
 
                 $date = new Carbon();
 
                 if($update){
                     $hist_alert = Historical_alert::find($update->id);
-                    //$hist_alert->alert_id = $alert[0]->id;
+                    $hist_alert->product_id = $alert[0]->id;
                     $hist_alert->created_at = $date->format('Y-m-d H:i:s');
                     $hist_alert->title = "Estoque Baixo";
                     $hist_alert->description = $name.' está com estoque baixo!!!';
                 }else{
                     $hist_alert = new Historical_alert();
-                    //$hist_alert->alert_id = $alert[0]->id;
+                    $hist_alert->product_id = $alert[0]->id;
                     $hist_alert->title = "Estoque Baixo";
                     $hist_alert->description = $name.' está com estoque baixo!!!';
                 }
@@ -67,7 +67,7 @@ class AlertStockMin
                 if($hist_alert->save()){
 
                   $response = \Telegram::sendMessage([
-                  'chat_id' => '840618696',
+                  'chat_id' => '-1001437741965.0',
                   'text' => '<b>ALERTA DE ESTOQUE BAIXO</b>                                                                  '.
                   '<b>Produto: </b><b>'.$name.'</b>                                                            '.
                   '<b>Alerta definido para: </b><b>'.$stock_min.' '.$event->product->unidade_medida.'</b>                                                          '.
@@ -77,7 +77,7 @@ class AlertStockMin
                   'parse_mode' => 'html',
                   ]);
 
-                  return redirect('/')->with('alert-toastr', 'O item '.$name.' está com estoque baixo!!!');
+                  return redirect('/')->with('alert-toastr', 'O produto '.$name.' está com estoque baixo!!!');
                 }
               }
     }

@@ -46,6 +46,5 @@
 </table>
   @endif
 </div>
-
-    {!!$hist_alerts->links()!!}
+{!!$hist_alerts->links()!!}
 @endsection

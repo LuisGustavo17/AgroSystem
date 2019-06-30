@@ -22,8 +22,7 @@
               <thead>
                 <tr>
                   <th scope="col">Id</th>
-                  <th scope="col">Usuário</th>
-                  <th scope="col">Descrição</th>
+                  <th scope="col">Evento</th>
                   <th scope="col">Data/Hora</th>
                 </tr>
               </thead>
@@ -31,7 +30,6 @@
                 @foreach ($logs as $log)
                 <tr>
                   <th>{{$log->id}}</th>
-                  <td>{{'anon'}}</td>
                   <td>{{$log->action}}</td>
                   <td>{{$log->created_at}}</td>
                 </tr>
