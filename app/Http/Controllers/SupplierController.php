@@ -37,9 +37,9 @@ class SupplierController extends Controller
       $this->validate($request, [
         'nome'=>'required|String|min:2',
         'email'=>'required|E-Mail',
-        'telefone'=>'required|Numeric|min:8',
+        'telefone'=>'required|Numeric|digits_between:8,12',
         'endereco'=>'required|String|min:8',
-        'cnpj'=>'required|Numeric',
+        'cnpj'=>'required|Numeric|digits:14',
       ]);
 
       $supplier = new Supplier();
@@ -71,9 +71,9 @@ class SupplierController extends Controller
       $this->validate($request, [
         'nome'=>'required|String|min:2',
         'email'=>'required|E-Mail',
-        'telefone'=>'required|Numeric|min:8',
+        'telefone'=>'required|Numeric|digits_between:8,12',
         'endereco'=>'required|String|min:8',
-        'cnpj'=>'required|Numeric',
+        'cnpj'=>'required|Numeric|digits:14',
       ]);
 
       $supplier->name = $request->get('nome');

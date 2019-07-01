@@ -111,7 +111,7 @@ class ProdutosEntriesController extends Controller
       $products_entries->data_validade = $request->get('data_validade');
       $products_entries->supplier_id = $request->input('fornecedor');
       $products_entries->preco = $request->input('preco');
-      
+
       $qtd = $request->get('quantidade');
 
       if($qtd > $products_entries->montante){
@@ -128,11 +128,12 @@ class ProdutosEntriesController extends Controller
 
       }else if($qtd < $products_entries->montante){
 
+          $aux =  $products_entries->montante - $qtd;
           //atualizando dados produto entrada
-          $products_entries->montante -= $qtd;
-          $products_entries->qtd_entrada -= $qtd;
+          $products_entries->montante = $qtd;
+          $products_entries->qtd_entrada = $qtd;
           //atualizando estoque total
-          $product->quantidade_total -= $qtd;
+          $product->quantidade_total -= $aux;
 
       }
 

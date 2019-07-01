@@ -40,7 +40,7 @@ class ProdutosController extends Controller
 
     public function store(Request $request){
       $this->validate($request, [
-        'titulo'=>'required|min:3',
+        'titulo'=>'required|min:3|unique:produtos,titulo',
         'descricao'=>'required|min:3|max:50',
         'unidade_medida'=>'required|string',
         'categoria'=>'required',
