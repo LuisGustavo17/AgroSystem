@@ -29600,3 +29600,8 @@ readers do not read off random characters that represent icons */
 .perfil{
   color: #97694F;
 }
+
+a.classe2:link, a.classe2:visited {
+  color:#6c757d;
+  text-decoration: none;
+}

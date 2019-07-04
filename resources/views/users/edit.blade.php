@@ -3,6 +3,15 @@
 @section('title','Editar Usuário')
 @section('content')
 
+{{-- breadcrumb --}}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Administração</li>
+    <li class="breadcrumb-item active"><a class="classe2" href="{{url('users')}}">Usuários</a></li>
+    <li class="breadcrumb-item active">Editar Usuário</li>
+  </ol>
+</nav>
+
     @if(count($errors)>0)
       <div class='alert alert-danger alert-dismissible fade show'>
         <ul>

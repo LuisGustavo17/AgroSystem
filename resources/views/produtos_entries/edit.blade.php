@@ -8,8 +8,8 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item active aria-current="page"">Movimentações</li>
-    <li class="breadcrumb-item active">Entrada</li>
-    <li class="breadcrumb-item active" aria-current="page">Editar</li>
+    <li class="breadcrumb-item active"><a class="classe2" href="{{url('produtos_entries')}}">Entrada</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar Entrada</li>
   </ol>
 </nav>
 

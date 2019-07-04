@@ -2,6 +2,15 @@
 @section('title','Entrada de novo Produto')
 @section('content')
 
+{{-- breadcrumb --}}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active aria-current="page"">Movimentações</li>
+    <li class="breadcrumb-item active"><a class="classe2" href="{{url('produtos_outputs')}}">Saída</a></li>
+    <li class="breadcrumb-item active">Realizar Saída</li>
+  </ol>
+</nav>
+
   @if($message = Session::get('success'))
     <div class='alert alert-success alert-dismissible fade show'>
         {{$message}}

@@ -7,8 +7,8 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item active" >Cadastros</li>
-    <li class="breadcrumb-item active">Fornecedores</li>
-    <li class="breadcrumb-item active">Editar</li>
+    <li class="breadcrumb-item active"><a class="classe2" href="{{url('supplier')}}">Fornecedores</a></li>
+    <li class="breadcrumb-item active">Editar Fornecedor</li>
   </ol>
 </nav>
 

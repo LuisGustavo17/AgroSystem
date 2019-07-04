@@ -1,6 +1,16 @@
 @extends('layouts.master')
 @section('title','Adicionar um Produto')
 @section('content')
+
+{{-- breadcrumb --}}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active aria-current="page"">Cadastros</li>
+    <li class="breadcrumb-item active"><a class="classe2" href="{{url('categories')}}">Categorias</a></li>
+    <li class="breadcrumb-item active">Adicionar Categoria</li>
+  </ol>
+</nav>
+
   @if($message = Session::get('success'))
     <div class='alert alert-success alert-dismissible fade show'>
         {{$message}}

@@ -1,6 +1,15 @@
 @extends('layouts.master')
 @section('title','Lista de Usuários')
 @section('content')
+
+{{-- breadcrumb --}}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Administração</li>
+    <li class="breadcrumb-item active">Usuários</li>
+  </ol>
+</nav>
+
 <div class="card">
   <div class="card-header">
     <h4>Usuários</h4>

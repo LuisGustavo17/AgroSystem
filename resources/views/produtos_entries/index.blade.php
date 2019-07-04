@@ -89,4 +89,7 @@
   @endif
 </div>
     {!!$products_entrie->links()!!}
+    <div class="text-right">
+      <button type="button" class="btn btn-sm btn-secondary" data-toggle="popover" data-placement="left" data-trigger="focus" title="Entrada de Produto" data-content="Para dar entrada em um produto é necessário existir seu prévio cadastro em Estoque..."><b>Instruções</b></button>
+    </div><br>
 @endsection

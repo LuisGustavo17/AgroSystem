@@ -2,6 +2,15 @@
 @section('title','Adicionar um Produto')
 @section('content')
 
+{{-- breadcrumb --}}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Administração</li>
+    <li class="breadcrumb-item active"><a class="classe2" href="{{url('users')}}">Usuários</a></li>
+    <li class="breadcrumb-item active">Adicionar Usuário</li>
+  </ol>
+</nav>
+
   @if(count($errors)>0)
     <div class="alert alert-danger alert-dismissible fade show">
       <ul>
@@ -16,7 +25,7 @@
   @endif
   <div class="card">
     <div class="card-header">
-      <h4>Adicionar um novo usuário</h4>
+      <h4>Adicionar um novo Usuário</h4>
     </div>
   <div class="card-body">
 	<form method="POST" action="{{url('users')}}">

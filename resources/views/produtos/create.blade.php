@@ -1,6 +1,12 @@
 @extends('layouts.master')
 @section('title','Adicionar um Produto')
 @section('content')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><a class="classe2" href="{{url('produtos')}}">Estoque</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Adicionar Produto</li>
+  </ol>
+</nav>
 
   @if($message = Session::get('success'))
     <div class='alert alert-success alert-dismissible fade show'>

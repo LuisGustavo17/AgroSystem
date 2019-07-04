@@ -7,8 +7,8 @@
 {{-- breadcrumb --}}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active aria-current="page"">Alerta</li>
-    <li class="breadcrumb-item active">Editar</li>
+    <li class="breadcrumb-item active" aria-current="page"><a class="classe2" href="{{url('alerts/rules')}}">Alerta</a></li>
+    <li class="breadcrumb-item active">Editar Alerta</li>
   </ol>
 </nav>
 
