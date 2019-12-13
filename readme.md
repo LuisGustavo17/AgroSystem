@@ -28,4 +28,7 @@ This is a demo of stock management system.
   ```
   ## Screenshot
 ![Captura de tela de 2019-12-13 20-45-12](https://user-images.githubusercontent.com/44074498/70839023-9ace0580-1de9-11ea-8011-bb3f328f119d.png)
+
 ![Captura de tela de 2019-12-13 19-32-34(1)](https://user-images.githubusercontent.com/44074498/70838948-53477980-1de9-11ea-822c-59ae150ff8d5.png)
+
+![Captura de tela de 2019-12-13 20-49-37](https://user-images.githubusercontent.com/44074498/70839154-36f80c80-1dea-11ea-9629-9f22e5e4e9e5.png)
