@@ -6,6 +6,8 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
+# Stock-Management
+This is a demo of stock management system.
 
 ## Features
   - Stock Adding
@@ -13,7 +15,6 @@
   - Supplier Management
   - Category Manage
   
-
 ## Run
   Copy .env.example to .env and setup your Database information.
 
@@ -28,3 +29,5 @@
 
   # serve at localhost:8000
   php artisan serve
+  ```
+  # Screenshot
