@@ -33,7 +33,7 @@
                       <div class="inner">
                         <h3>{{$user}}</h3>
 
-                        <h4>Usuários Registrados</h4>
+                        <h4>Usuários</h4>
                       </div>
                       <div class="icon">
                         <i class="fas fa-user"></i>
