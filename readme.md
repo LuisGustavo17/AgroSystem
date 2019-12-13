@@ -7,6 +7,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Features
+  - Stock Adding
+  - Stock Manage 
+  - Supplier Management
+  - Category Manage
+  
+
 ## Run
   Copy .env.example to .env and setup your Database information.
 
