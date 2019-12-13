@@ -30,4 +30,4 @@ This is a demo of stock management system.
   # serve at localhost:8000
   php artisan serve
   ```
-  # Screenshot
+  ## Screenshot
