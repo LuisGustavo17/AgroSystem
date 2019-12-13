@@ -1,4 +1,4 @@
-# Product management
+# Product Management
 This is a demo of stock management system.
 
 ## Features
