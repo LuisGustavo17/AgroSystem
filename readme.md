@@ -27,4 +27,4 @@ This is a demo of stock management system.
   php artisan serve
   ```
   ## Screenshot
-https://user-images.githubusercontent.com/44074498/70838773-889f9780-1de8-11ea-841d-bf73e9fa9996.png
+
